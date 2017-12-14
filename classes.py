@@ -22,7 +22,7 @@ class labyrinthe: # niveau du jeu
 	def __init__(self):
 		self.x = 15 # nombre de case en abscisse
 		self.y = 15 # nombre de case en ordonnée
-		self.labyrinthe = [ 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+		self.labyrinthe = [ "M",1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 							0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 							1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
 							1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
@@ -37,15 +37,15 @@ class labyrinthe: # niveau du jeu
 							1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
 							1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
 							1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
-							1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,] # le labyrinthe
+							1,1,1,1,1,1,1,1,1,1,1,1,1,1,"G",] # le labyrinthe
 				
 	def afficher(self,afficher_mur):# afficher le labyrinthe
 
 	    x = 0 # je définis la valeur de base qui servira à afficher mon labyrinthe
 	    y = 0
 
-	    for i in range(0,self.x*self.y):
-	        if self.labyrinthe[ x + (y*self.x) ] == 1:
+	    for self.labyrinthe in range(0,self.x*self.y):
+	        if self.labyrinthe[ x + (y*self.x) ] >= 1:
 	               afficher_mur.blit("mur.png",( x * 15 , y * 15))
 	 
 	        x = x + 1
