@@ -1,14 +1,74 @@
+import random
+
 class Niveau:
 #générer le labyrinthe à partir du fichier lab1
-
     def __init__(self):
+        self.structure = 0
+        self.inventory = 0
+
+    def generer(self):
         print("Affichage du labyrinthe")
-        with open("lab1", "r") as self.structure:
-            self.ouverture_fichier = self.structure.read()
-            self.generation_liste = list(self.ouverture_fichier)
+        with open("lab1", "r") as fichier:#on ouvre le fichier du labyrinthe
+            structure_niveau = []#permet de generer une liste
+            for ligne in fichier:#permet de lire les lignes du fichier
+                ligne_niveau = []#permet de generer une nouvelle liste pour faire une liste de liste
+                for caractere in ligne:#permet de generer une liste dans la liste
+                    if caractere != "\n":#si le characterte est different de \n on l'affiche
+                        ligne_niveau.append(caractere)# ajoute chaque characteres a la liste de la ligne
+
+                structure_niveau.append(ligne_niveau)#ajoute chaque ligne a la liste
+
+        while self.inventory <3:
+            x_potion = random.randint(0, 14)
+            y_potion = random.randint(0, 14)
+
+            if structure_niveau[y_potion][x_potion] == "o":
+
+                structure_niveau[y_potion][x_potion] == "p"
+
+                self.inventory += 1
+
+        self.structure = structure_niveau#permet de recuperer "structure" pour une utilisation pour une autre methode apr exemple
+
+        print(structure_niveau)
+"""
+class Macgyver:
+
+    def deplacer(self):
+        #on établi les positions par défaut de x et y
+        self.case_x = 0
+        self.case_y = 0
+        #déplacement à droite
+        if self.direction == "droite":
+            if self.structure[self.case_y][self.case_x+1] !="w":
+                    self.case_x = self.case_x+1
+                    self.case_x+1 = self.case_x
+
+        if self.direction == "gauche":
+            if self.structure[self.case_y][self.case_x-1] !="w":
+                self.case_x = self.case_x-1
+                self.case_x-1 = self.case_x
+
+        if self.direction == "haut":
+            if self.structure[self.case_y-1][self.case_x] !="w":
+                self.case_y = self.case_y-1
+                self.case_y-1 = self.case_y
+
+        if self.direction == "bas":
+            if self.structure[self.case_y+1][self.case_x] !="w":
+                self.case_y = self.case_y+1
+                self.case_y+1 = self.case_y
+
+"""
+
+"""
+class Inventory:
+
+    def
+"""
 
 labyrinthe = Niveau()
-print(labyrinthe.generation_liste)
+labyrinthe.generer()
 
 
 
@@ -19,11 +79,7 @@ print(labyrinthe.generation_liste)
 #"""if "m" dans la liste alors position du joueur"""
 #macgyver peut mourir
 #"""if déplacement "m" sur position liste m+1, m-1, m+15, m-15 == "g" sans les objets alors game over"""
-#faire déplacer MacGyver avec les touches directionnelles
- #"""if "m" dans la liste récupérer sa position dans la liste"""
- #"""if les positions dans la liste m+1, m-1, m+15, m-15 == "0" alors peut se déplacer"""
- #"""if les positions dans la liste m+1, m-1, m+15, m-15 == "w" alors déplacement impossible"""
- #"""remplacer la position de "m" dans la liste par une nouvelle"""
+
 #macgyver doit récupérer des objets pour sortir
 #"""placer aléatoirement dans la liste du labyrinthe les objets"""
 #"""récupérer les objets est les mettre dans un inventaire(afficher le nombre d'objet)"""
