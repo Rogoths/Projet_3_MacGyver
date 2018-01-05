@@ -19,53 +19,48 @@ class Niveau:
                 structure_niveau.append(ligne_niveau)#ajoute chaque ligne a la liste
 
         while self.inventory <3:
+            #place les objets dans le labyrinthe
             x_potion = random.randint(0, 14)
             y_potion = random.randint(0, 14)
 
             if structure_niveau[y_potion][x_potion] == "o":
-
-                structure_niveau[y_potion][x_potion] == "p"
-
-                self.inventory += 1
+                if self.inventory == 0:
+                    structure_niveau[y_potion][x_potion] == "S" #sword
+                elif self.inventory == 1:
+                    structure_niveau[y_potion][x_potion] == "A" #armor
+                elif self.inventory == 2:
+                    structure_niveau[y_potion][x_potion] == "P" #potion
 
         self.structure = structure_niveau#permet de recuperer "structure" pour une utilisation pour une autre methode apr exemple
 
         print(structure_niveau)
-"""
-class Macgyver:
+
+class Macgyver(Niveau):
+    def __init__(self):
+        Niveau.__init__(self)
 
     def deplacer(self):
         #on établi les positions par défaut de x et y
         self.case_x = 0
         self.case_y = 0
+        Mac = self.structure.index("m")
+
         #déplacement à droite
         if self.direction == "droite":
             if self.structure[self.case_y][self.case_x+1] !="w":
-                    self.case_x = self.case_x+1
-                    self.case_x+1 = self.case_x
+                self.structure[self.case_y][self.case_x], self.structure[self.case_y][self.case_x+1] = self.structure[self.case_y][self.case_x+1], self.structure[self.case_y][self.case_x]
 
         if self.direction == "gauche":
             if self.structure[self.case_y][self.case_x-1] !="w":
-                self.case_x = self.case_x-1
-                self.case_x-1 = self.case_x
+                self.structure[self.case_y][self.case_x], self.structure[self.case_y][self.case_x-1] = self.structure[self.case_y][self.case_x-1], self.structure[self.case_y][self.case_x]
 
         if self.direction == "haut":
             if self.structure[self.case_y-1][self.case_x] !="w":
-                self.case_y = self.case_y-1
-                self.case_y-1 = self.case_y
+                self.structure[self.case_y][self.case_x], self.structure[self.case_y-1][self.case_x] = self.structure[self.case_y-1][self.case_x], self.structure[self.case_y][self.case_x]
 
         if self.direction == "bas":
             if self.structure[self.case_y+1][self.case_x] !="w":
-                self.case_y = self.case_y+1
-                self.case_y+1 = self.case_y
-
-"""
-
-"""
-class Inventory:
-
-    def
-"""
+                self.structure[self.case_y][self.case_x], self.structure[self.case_y+1][self.case_x] = self.structure[self.case_y+1][self.case_x], self.structure[self.case_y][self.case_x]
 
 labyrinthe = Niveau()
 labyrinthe.generer()
@@ -76,12 +71,12 @@ labyrinthe.generer()
 #afficher ce labyrinthe
 #print(self.fichier())
 #localiser macgyver sur le labyrinthe
-#"""if "m" dans la liste alors position du joueur"""
+#if "m" dans la liste alors position du joueur
 #macgyver peut mourir
-#"""if déplacement "m" sur position liste m+1, m-1, m+15, m-15 == "g" sans les objets alors game over"""
+#if déplacement "m" sur position liste m+1, m-1, m+15, m-15 == "g" sans les objets alors game over"""
 
 #macgyver doit récupérer des objets pour sortir
-#"""placer aléatoirement dans la liste du labyrinthe les objets"""
+#placer aléatoirement dans la liste du labyrinthe les objets"""
 #"""récupérer les objets est les mettre dans un inventaire(afficher le nombre d'objet)"""
 #"""faire disparaître les objets de la liste"""
 
