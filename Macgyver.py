@@ -5,6 +5,7 @@ class Niveau:
     def __init__(self):
         self.structure = 0
         self.inventory = 0
+        self.structure_map = self.generer()
 
     def generer(self):
         print("Affichage du labyrinthe")
@@ -25,89 +26,94 @@ class Niveau:
 
             if structure_niveau[y_potion][x_potion] == "o":
                 if self.inventory == 0:
-                    structure_niveau[y_potion][x_potion] == "S" #sword
+                    structure_niveau[y_potion][x_potion] = "S" #sword
                 elif self.inventory == 1:
-                    structure_niveau[y_potion][x_potion] == "A" #armor
+                    structure_niveau[y_potion][x_potion] = "A" #armor
                 elif self.inventory == 2:
-                    structure_niveau[y_potion][x_potion] == "P" #potion
+                    structure_niveau[y_potion][x_potion] = "P" #potion
 
-        self.structure = structure_niveau#permet de recuperer "structure" pour une utilisation pour une autre methode apr exemple
+                self.inventory += 1
+                self.structure = structure_niveau#permet de recuperer "structure" pour une utilisation pour une autre methode apr exemple
 
         print(structure_niveau)
+"""
+    def display(self):
 
-class Macgyver(Niveau):
-    def __init__(self):
-        Niveau.__init__(self)
+        for line in self.structure_map:
+            for caractere in line:
+                print(self.structure_map[line][caractere], end=" ")
+            print()
+"""
 
-    def deplacer(self):
+
+class Macgyver:
+    def __init__(self, case_x, case_y, structure):
         #on établi les positions par défaut de x et y
         self.case_x = 0
         self.case_y = 0
-        Mac = self.structure.index("m")
+        self.case_x = case_x
+        self.case_y = case_y
+        self.structure = structure
 
+    def move(self, direction):
         #déplacement à droite
-        if self.direction == "droite":
-            if self.structure[self.case_y][self.case_x+1] !="w":
-                self.structure[self.case_y][self.case_x], self.structure[self.case_y][self.case_x+1] = self.structure[self.case_y][self.case_x+1], self.structure[self.case_y][self.case_x]
-
-        if self.direction == "gauche":
-            if self.structure[self.case_y][self.case_x-1] !="w":
-                self.structure[self.case_y][self.case_x], self.structure[self.case_y][self.case_x-1] = self.structure[self.case_y][self.case_x-1], self.structure[self.case_y][self.case_x]
-
-        if self.direction == "haut":
-            if self.structure[self.case_y-1][self.case_x] !="w":
-                self.structure[self.case_y][self.case_x], self.structure[self.case_y-1][self.case_x] = self.structure[self.case_y-1][self.case_x], self.structure[self.case_y][self.case_x]
-
-        if self.direction == "bas":
-            if self.structure[self.case_y+1][self.case_x] !="w":
-                self.structure[self.case_y][self.case_x], self.structure[self.case_y+1][self.case_x] = self.structure[self.case_y+1][self.case_x], self.structure[self.case_y][self.case_x]
-
-labyrinthe = Niveau()
-labyrinthe.generer()
+        if direction == "right":
+            if self.structure.structure_map[self.case_y][self.case_x+1] !="w":
+                self.case_x += 1
+        if direction == "left":
+            if self.structure.structure_map[self.case_y][self.case_x-1] !="w":
+                self.case_x -= 1
+        if direction == "up":
+            if self.structure.structure_map[self.case_y-1][self.case_x] !="w":
+                self.case_y -= 1
+        if direction == "down":
+            if self.structure.structure_map[self.case_y+1][self.case_x] !="w":
+                self.case_y += 1
 
 
+start_game = 1
+mac_case_x = 0
+mac_case_y = 0
+items = 0
+
+while start_game:
+
+    if start_game == 1:
+        #create the maze and display
+        maze = Niveau()
+        mac = Macgyver(mac_case_x, mac_case_y, maze)
 
 
-#afficher ce labyrinthe
-#print(self.fichier())
-#localiser macgyver sur le labyrinthe
-#if "m" dans la liste alors position du joueur
-#macgyver peut mourir
-#if déplacement "m" sur position liste m+1, m-1, m+15, m-15 == "g" sans les objets alors game over"""
+    continue_game = 1
+    direction = input("direction?")
 
-#macgyver doit récupérer des objets pour sortir
-#placer aléatoirement dans la liste du labyrinthe les objets"""
-#"""récupérer les objets est les mettre dans un inventaire(afficher le nombre d'objet)"""
-#"""faire disparaître les objets de la liste"""
+    while continue_game:
 
-#localiser le gardien sur le labyrinthe
+        if direction == "right":
+            mac.move("right")
+        if direction == "left":
+            mac.move("left")
+        if direction == "up":
+            mac.move("up")
+        if direction == "down":
+            mac.move("down")
 
-#terminer la partie
-#"""if déplacement "m" sur position liste m+1, m-1, m+15, m-15 == "g" avec les objets alors gagné sinon perdu"""
+    if maze.structure_map[mac.mac_case_y][mac_case_x] == "S":
+        items += 1# increase inventory
+        print(items)#display number of items
 
-#class macgyver: # class permettant de créer le personnage
+    if maze.structure_map[mac.mac_case_y][mac_case_x] == "A":
+        items += 1
+        print(items)
 
-	#def __init__(self):
+    if maze.structure_map[mac.mac_case_y][mac_case_x] == "P":
+        items += 1
+        print(items)
 
-		#self.case_x = 0
-		#self.case_y = 0
-		#macgyver = "m"
+    if maze.structure_map[mac.mac_case_y][mac_case_x] == "g":
+        if items >= 3:
+            maze.structure_map[mac.mac_case_y][mac_case_x] = "o"
+            print("Bravo!")
 
-		#def deplacer(self):
-		#if deplacement == "haut"(m-15)
-
-
-		#if deplacement == "bas"(m+15)
-
-
-		#if deplacement == "gauche"(m-1)
-
-
-		#if deplacement == "droite"(m+1)
-
-	#récupérer des objets
-
-#class objets:
-
-	#def __init__(self): # objets à récupérer
-	# se faire récolter et disparaître
+        else:
+            print("Perdu!")
