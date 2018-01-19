@@ -47,7 +47,9 @@ class Niveau:
         needle = pygame.image.load(img_needle).convert_alpha()
         tube = pygame.image.load(img_tube).convert_alpha()
         ether = pygame.image.load(img_ether).convert_alpha()
-        mac = pygame.image.load(img_mac_nerd).convert()
+        mac = pygame.image.load(img_mac).convert()
+        murdoc = pygame.image.load(img_murdoc).convert()
+        background = pygame.image.load(img_background).convert()
         number_line = 0
         for line in self.structure_map:
             number_case = 0
@@ -56,20 +58,21 @@ class Niveau:
                 sprite_y = number_line * sprite_size
                 if sprite == "w":
                     screen.blit(wall,(sprite_x,sprite_y))
+                #elif sprite == "o": (image de sol??)
+                    #screen.blit(floor,(sprite_x,sprite_y))
                 elif sprite == needle_item:
                     screen.blit(needle,(sprite_x,sprite_y))
                 elif sprite == tube_item:
                     screen.blit(tube,(sprite_x,sprite_y))
                 elif sprite == ether_item:
                     screen.blit(ether,(sprite_x,sprite_y))
-                elif sprite == "m":
-                    screen.blit(mac,(sprite_x,sprite_y))
-                else:
-                    screen.blit(floor,(sprite_x,sprite_y))
+                elif sprite == "g":
+                    screen.blit(murdoc,(sprite_x,sprite_y))
+
                 number_case += 1
             number_line += 1
 
-class Macgyver:
+class Characters:
     def __init__(self, case_x, case_y, img_convert, structure):
         #initialise x and y position
         self.case_x = 0
@@ -81,7 +84,6 @@ class Macgyver:
         self.structure = structure
         self.image_convert = pygame.image.load(img_convert).convert_alpha()#add the conversion for pygame image
         self.inventory = 0
-
 
     def move(self, direction):
         #déplacement à droite
@@ -106,11 +108,17 @@ class Macgyver:
                     self.case_y += 1
                     self.y = self.case_y * sprite_size
 
-    def convert(self, img_convert):
+    #def convert(self, img_convert): (a utiliser si changement d'image de macgyver apres avoir recuperé tout les objets)
 
-        self.image_convert = pygame.image.load(img_convert).convert_alpha()#add the conversion for pygame image
+        #self.image_convert = pygame.image.load(img_convert).convert_alpha()#add the conversion for pygame image
 
     def reset(self):
 
-        self.inventory += 1
         self.structure.structure_map[self.case_y][self.case_x] = "o"
+
+    def collect_inventory(self):
+        self.inventory += 1
+
+    def display_inventory(self):
+        count = "inventory ="+ self.inventory
+        return count
