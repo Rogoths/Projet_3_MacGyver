@@ -77,7 +77,7 @@ class Character:
         self.case_x = 0#initialise the start position from the structure
         self.case_y = 0
         self.x = 0
-        self.y = 30#start position with the banner size
+        self.y = 30#start position with the banner size.
         self.structure = structure
         self.image = pygame.image.load(IMG_MAC).convert_alpha()#add the conversion for pygame image
         self.inventory = 0
