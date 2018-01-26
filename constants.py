@@ -1,34 +1,34 @@
+"""constants for the game"""
+
+# sprite size
+SPRITE_SIZE = 30
+NUMBER_SPRITE_LINE = 15
+NUMBER_SPRITE_COLUMN = 15
+BANNER_SIZE = 30
+
 #width and height of the window
-sprite_size = 30
-number_sprite_line = 15
-number_sprite_column = 15
-banner_size = 30
+SCREEN_W = SPRITE_SIZE * NUMBER_SPRITE_COLUMN
+SCREEN_H = SPRITE_SIZE * NUMBER_SPRITE_LINE + BANNER_SIZE
 
-screenW = sprite_size * number_sprite_column
-screenH = sprite_size * number_sprite_line + banner_size
+#Items
+NEEDLE_ITEM = "S"
+TUBE_ITEM = "A"
+ETHER_ITEM = "P"
 
+#images path
+IMG_WALL = "images/mur.png"
+IMG_MAC = "images/mac_gyver.png"
+IMG_NEEDLE = "images/aiguille.png"
+IMG_ETHER = "images/ether.png"
+IMG_TUBE = "images/tube.png"
+IMG_BACKGROUND = "images/background.jpg"
+IMG_MURDOC = "images/murdoc.png"
+IMG_WIN = "images/macgyver_happy.jpg"
+IMG_LOSE = "images/mac_lose.jpg"
+IMG_MACGYVER_BANNER = "images/macgyver.png"
+IMG_MAINSCREEN = "images/macgyver_mainscreen.png"
 
-
-needle_item = "S"
-tube_item = "A"
-ether_item = "P"
-
-#mac_case_x = 0
-#mac_case_y = 0
-
-
-
-img_floor = "images/sol.png"
-img_wall = "images/mur.png"
-img_mac = "images/mac_gyver.png"
-img_needle = "images/aiguille.png"
-img_ether = "images/ether.png"
-img_tube = "images/tube.png"
-img_background = "images/background.jpg"
-img_murdoc = "images/murdoc.png"
-img_win = "images/macgyver_happy.jpg"
-img_lose = "images/mac_lose.jpg"
-img_macgyver_banner = "images/macgyver.png"
-img_mainscreen = "images/macgyver_mainscreen.png"
-
-music_mac = "musics/macgyver_theme.ogg"
+#Musics path
+MUSIC_MAC = "musics/macgyver_theme.ogg"
+MUSIC_WIN = "musics/victory.ogg"
+MUSIC_LOSE = "musics/game_over.wav"
