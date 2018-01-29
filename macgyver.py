@@ -28,7 +28,7 @@ class Level:
         while self.inventory < 3:
 
             x_item = random.randint(0, 14)
-            y_item = random.randint(1, 14)
+            y_item = random.randint(0, 14)
             #placement of the items in the structure
             if structure_level[y_item][x_item] == "o":
                 if self.inventory == 0:
@@ -84,7 +84,7 @@ class Character:
 
     def move(self, direction):
         """movements of the character"""
-        #déplacement à droite
+        #to the right
         if direction == "right":
             if self.case_x < (NUMBER_SPRITE_LINE - 1):
                 if self.structure.structure_map[self.case_y][self.case_x + 1] != "w":

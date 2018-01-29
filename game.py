@@ -3,12 +3,14 @@
     -You need to find all the items on the map to craft the ultimate object
     -Murdoc keep the exit
     -If you find the exit without all the items Murdoc kill you
-    -If you find the with all the items you sedate Murdoc and save your hair"""
+    -If you find the with all the items you sedate Murdoc and save your hair
+
+    files : game.py , macgyver.py , constants.py , lab1 , /musics , /images"""
 
 import pygame
 from pygame.locals import *
 from constants import *
-from macgyver import *
+from macgyver import Level, Character
 
 pygame.init()
 
@@ -64,7 +66,7 @@ while main_screen:
                 continue_game = True#stay the same
     pygame.display.flip()#refresh
 
-    if load_game == True:
+    if load_game:
         #create the maze and display
         maze = Level()
         maze.display(SCREEN)
@@ -90,9 +92,14 @@ while continue_game:
                 macgyver.move('right')
             if event.type == pygame.QUIT:
                 continue_game = False
+            if event.type == pygame.QUIT:#close the window
+                main_screen = False
+                load_game = False
+                continue_game = False
 
         if maze.structure_map[macgyver.case_y][macgyver.case_x] == NEEDLE_ITEM:
             macgyver.reset()
+
             macgyver.collect_inventory()
             SCREEN.blit(NEEDLE, (210, 0))
         if maze.structure_map[macgyver.case_y][macgyver.case_x] == TUBE_ITEM:
@@ -115,7 +122,7 @@ while continue_game:
                 while win:#end_game
                     #if win...
                     WIN_MUSIC.play()
-                    SCREEN.blit(BACKGROUND, (0, 30))
+                    #SCREEN.blit(BACKGROUND, (0, 30))
                     SCREEN.blit(WIN_SCREEN, (90, 30))
                     font = pygame.font.Font(None, 30)
                     text = font.render("You are safe! Press ESCAPE to quit the game", 1, (255, 255, 255)) # Display the text in white with rounded edge
@@ -148,5 +155,8 @@ while continue_game:
         SCREEN.blit(BACKGROUND, (0, 30))
         maze.display(SCREEN)
         SCREEN.blit(macgyver.image, (macgyver.x, macgyver.y))#from Mac object use png file to reuse it(image_convert = mac sprite from Mac object)
+        inventory.fill((0, 0, 0))
+        SCREEN.blit(inventory, (300, 10))
+        inventory = font.render(macgyver.display_inventory(), 1, (255, 255, 255))
         SCREEN.blit(inventory, (300, 10))
         pygame.display.flip() #will update the contents of the entire display
